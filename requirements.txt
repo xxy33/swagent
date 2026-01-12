@@ -1,0 +1,50 @@
+# SolidWaste-Agent 依赖包列表
+
+# 核心依赖
+python-dotenv>=1.0.0        # 环境变量管理
+pyyaml>=6.0                 # YAML配置文件解析
+pydantic>=2.0.0             # 数据验证
+
+# 异步编程
+asyncio>=3.4.3              # 异步IO支持
+aiohttp>=3.8.0              # 异步HTTP客户端
+
+# LLM相关
+openai>=1.0.0               # OpenAI API客户端
+tiktoken>=0.5.0             # Token计数
+
+# 数据处理
+pandas>=2.0.0               # 数据分析
+numpy>=1.24.0               # 数值计算
+scipy>=1.10.0               # 科学计算
+
+# 可视化
+matplotlib>=3.7.0           # 绘图
+plotly>=5.14.0              # 交互式图表
+
+# 工具相关
+requests>=2.31.0            # HTTP请求
+beautifulsoup4>=4.12.0      # HTML解析
+lxml>=4.9.0                 # XML/HTML解析
+
+# 日志和监控
+colorlog>=6.7.0             # 彩色日志输出
+tqdm>=4.65.0                # 进度条
+
+# 测试
+pytest>=7.4.0               # 测试框架
+pytest-asyncio>=0.21.0      # 异步测试支持
+pytest-cov>=4.1.0           # 测试覆盖率
+
+# 开发工具
+black>=23.0.0               # 代码格式化
+flake8>=6.0.0               # 代码检查
+mypy>=1.4.0                 # 类型检查
+isort>=5.12.0               # import排序
+
+# 可选依赖（根据需要安装）
+# redis>=4.5.0              # Redis客户端（用于缓存和存储）
+# pymongo>=4.3.0            # MongoDB客户端（用于存储）
+# chromadb>=0.4.0           # 向量数据库（用于知识库）
+# sentence-transformers>=2.2.0  # 句子嵌入模型
+# langchain>=0.0.300        # LangChain框架（参考）
