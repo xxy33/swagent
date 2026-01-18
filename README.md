@@ -1,369 +1,447 @@
-# SolidWaste-Agent (SWAgent)
+# SWAgent - 固体废物管理智能Agent系统
 
-> 面向固体废物领域的多智能体协作框架
-
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]()
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-## 📖 项目简介
+SWAgent是一个专注于固体废物管理领域的智能Agent系统，集成了LLM、多Agent协作、工具调用、领域知识库和工作流模板等功能，为固废管理提供全方位的智能化支持。
 
-SolidWaste-Agent (SWAgent) 是一个专门面向固体废物领域的多智能体协作框架，支持科研辅助、代码生成、报告撰写、数据分析等任务。该框架通过多个专业Agent的协作，帮助研究人员和工程师高效完成固废领域的各类工作。
+## ✨ 主要特性
 
-### ✨ 核心特性
+### 🤖 智能Agent系统
+- **多种Agent类型**：PlannerAgent（规划）、ReActAgent（推理-行动）
+- **多Agent协作**：支持辩论、投票、共识等协作模式
+- **消息总线**：统一的Agent间通信机制
+- **速率限制**：防止API过载的智能限流
 
-- 🔄 **灵活的Agent交互与通信机制** - 支持点对点、广播、发布订阅等多种通信模式
-- 📝 **上下文感知与记忆管理** - 智能的上下文管理和多级记忆系统
-- 🛠️ **可扩展的工具调用系统** - 内置多种工具，支持自定义扩展
-- 🏭 **固废领域专业知识集成** - 包含固废分类、排放计算、LCA分析等专业工具
-- 🤖 **多Agent协作编排** - 支持顺序、并行、层级等多种编排模式
-- 📊 **工作流模板** - 提供科研、报告、分析等预设工作流
+### 🛠️ 强大的工具系统
+- **双协议支持**：同时支持OpenAI Function Calling和MCP协议
+- **内置工具**：代码执行、文件处理、网络搜索
+- **领域工具**：排放计算、LCA分析、数据可视化
+- **工具注册中心**：灵活的工具管理和调用
 
-## 🚀 快速开始
+### 📚 专业领域知识库
+- **固废知识库**：废物分类、处理方法、废物层级
+- **专业术语库**：60+ 术语，中英互译，缩写展开
+- **标准规范库**：30+ 国家/国际标准、法规政策
+- **领域提示词**：8种专业场景的优化提示词
+
+### 🔄 预定义工作流
+- **科研工作流**：文献调研 → 研究设计 → 数据分析 → 论文撰写
+- **报告工作流**：需求分析 → 数据收集 → 内容撰写 → 质量检查
+- **分析工作流**：数据导入 → 清洗 → 统计分析 → 可视化
+- **编码工作流**：需求分析 → 设计 → 编码 → 测试 → 文档
+
+### 🔌 灵活的LLM集成
+- **多模型支持**：OpenAI、本地模型、Azure
+- **自定义base_url**：支持本地部署的兼容API
+- **流式响应**：支持流式对话
+- **Function Calling**：原生支持工具调用
+
+## 🏗️ 架构概览
+
+```
+swagent/
+├── agent/              # Agent核心模块
+│   ├── base_agent.py       # Agent基类
+│   ├── planner_agent.py    # 规划Agent
+│   ├── react_agent.py      # ReAct Agent
+│   ├── message_bus.py      # 消息总线
+│   └── orchestrator.py     # 多Agent编排器
+│
+├── llm/                # LLM接口层
+│   ├── base_llm.py         # LLM基类
+│   └── openai_client.py    # OpenAI客户端
+│
+├── tools/              # 工具系统
+│   ├── base_tool.py        # 工具基类
+│   ├── tool_registry.py    # 工具注册中心
+│   ├── builtin/            # 内置工具
+│   └── domain/             # 领域工具
+│
+├── domain/             # 领域增强
+│   ├── knowledge_base.py   # 知识库
+│   ├── terminology.py      # 术语库
+│   ├── standards.py        # 标准库
+│   ├── prompts.py          # 领域提示词
+│   └── data/               # 领域数据
+│
+└── workflows/          # 工作流模板
+    ├── base_workflow.py    # 工作流基类
+    ├── research_workflow.py    # 科研工作流
+    ├── report_workflow.py      # 报告工作流
+    ├── analysis_workflow.py    # 分析工作流
+    └── coding_workflow.py      # 编码工作流
+```
+
+## 📦 安装
 
 ### 环境要求
-
 - Python 3.8+
-- pip 包管理器
-- OpenAI API密钥（可选，支持本地模型）
+- pip
 
 ### 安装步骤
 
-1. **克隆或下载项目**
-
 ```bash
-cd c:/Users/CHENXY/Desktop/x/vscode/envagent
-```
+# 克隆仓库
+git clone https://github.com/yourusername/swagent.git
+cd swagent
 
-2. **创建虚拟环境（推荐）**
-
-```bash
-# Windows
-python -m venv venv
-venv\Scripts\activate
-
-# Linux/Mac
-python -m venv venv
-source venv/bin/activate
-```
-
-3. **安装依赖**
-
-```bash
+# 安装依赖
 pip install -r requirements.txt
+
+# （可选）安装可选依赖
+pip install matplotlib  # 用于数据可视化
 ```
 
-4. **配置环境变量**
+### 配置
 
-创建 `.env` 文件并添加API密钥：
+创建 `.env` 文件并配置：
 
-```bash
-# .env 文件
-OPENAI_API_KEY=your_openai_api_key_here
+```env
+# OpenAI配置
+OPENAI_API_KEY=your_api_key_here
+OPENAI_BASE_URL=https://api.openai.com/v1  # 或你的自定义URL
+
+# 模型配置
+DEFAULT_MODEL=gpt-4
+DEFAULT_TEMPERATURE=0.7
 ```
 
-或在系统中设置环境变量：
+## 🚀 快速开始
 
-```bash
-# Windows (CMD)
-set OPENAI_API_KEY=your_openai_api_key_here
-
-# Windows (PowerShell)
-$env:OPENAI_API_KEY="your_openai_api_key_here"
-
-# Linux/Mac
-export OPENAI_API_KEY=your_openai_api_key_here
-```
-
-5. **验证安装**
-
-```bash
-python examples/01_simple_chat.py
-```
-
-## 📚 项目结构
-
-```
-envagent/
-├── README.md                    # 项目说明文档（本文件）
-├── INSTALLATION.md              # 详细安装配置指南
-├── requirements.txt             # Python依赖包列表
-├── setup.py                     # 安装配置脚本
-├── config.yaml                  # 全局配置文件
-├── .env.example                 # 环境变量示例
-│
-├── swagent/                     # 核心包
-│   ├── __init__.py
-│   ├── core/                    # 核心模块
-│   │   ├── base_agent.py        # Agent基类
-│   │   ├── message.py           # 消息系统
-│   │   ├── context.py           # 上下文管理
-│   │   ├── memory.py            # 记忆系统
-│   │   ├── communication.py     # 通信协议
-│   │   └── orchestrator.py      # 编排调度器
-│   │
-│   ├── agents/                  # Agent实现
-│   │   ├── planner_agent.py     # 规划Agent
-│   │   ├── coder_agent.py       # 代码Agent
-│   │   ├── writer_agent.py      # 写作Agent
-│   │   ├── researcher_agent.py  # 研究Agent
-│   │   ├── data_agent.py        # 数据分析Agent
-│   │   └── reviewer_agent.py    # 审核Agent
-│   │
-│   ├── tools/                   # 工具系统
-│   │   ├── base_tool.py         # 工具基类
-│   │   ├── tool_registry.py     # 工具注册
-│   │   ├── builtin/             # 内置工具
-│   │   └── domain/              # 领域工具
-│   │
-│   ├── domain/                  # 固废领域模块
-│   │   ├── knowledge_base.py    # 知识库
-│   │   ├── terminology.py       # 术语库
-│   │   └── data/                # 领域数据
-│   │
-│   ├── llm/                     # LLM接口层
-│   │   ├── base_llm.py          # LLM基类
-│   │   ├── openai_client.py     # OpenAI接口
-│   │   └── prompt_manager.py    # Prompt管理
-│   │
-│   └── utils/                   # 工具函数
-│       ├── logger.py            # 日志系统
-│       └── config.py            # 配置管理
-│
-├── workflows/                   # 工作流定义
-│   ├── research_workflow.py     # 科研工作流
-│   ├── report_workflow.py       # 报告工作流
-│   └── analysis_workflow.py     # 分析工作流
-│
-├── examples/                    # 示例代码
-│   ├── 01_simple_chat.py        # 简单对话
-│   ├── 02_code_generation.py    # 代码生成
-│   ├── 03_report_writing.py     # 报告撰写
-│   ├── 04_multi_agent.py        # 多Agent协作
-│   └── 05_domain_analysis.py    # 领域分析
-│
-├── tests/                       # 测试代码
-│   ├── test_agents.py
-│   ├── test_tools.py
-│   └── test_workflows.py
-│
-└── docs/                        # 文档
-    ├── architecture.md          # 架构设计
-    ├── api_reference.md         # API参考
-    ├── development_guide.md     # 开发指南
-    └── domain_knowledge.md      # 领域知识说明
-```
-
-## 💡 使用示例
-
-### 1. 简单对话
+### 1. 基础Agent使用
 
 ```python
 import asyncio
-from swagent.agents.planner_agent import PlannerAgent
-from swagent.core.message import Message, MessageType
+from swagent.agent import ReActAgent
+from swagent.llm import OpenAIClient, LLMConfig
 
+# 配置LLM
+config = LLMConfig(
+    provider="openai",
+    model="gpt-4",
+    api_key="your_api_key",
+    base_url="https://api.openai.com/v1"
+)
+llm = OpenAIClient(config)
+
+# 创建Agent
+agent = ReActAgent("助手", llm=llm)
+
+# 执行任务
 async def main():
-    # 创建Agent
-    agent = PlannerAgent()
-    
-    # 创建消息
-    message = Message(
-        sender="user",
-        sender_name="用户",
-        content="请分析城市生活垃圾焚烧的碳排放计算方法",
-        msg_type=MessageType.REQUEST
-    )
-    
-    # 运行Agent
-    response = await agent.run(message)
-    print(response.content)
+    result = await agent.execute("帮我分析一下塑料回收的环境效益")
+    print(result)
 
 asyncio.run(main())
 ```
 
-### 2. 多Agent协作
+### 2. 使用工具系统
 
 ```python
-import asyncio
-from swagent.core.orchestrator import Orchestrator, TaskDefinition
-from swagent.agents.planner_agent import PlannerAgent
+from swagent.tools import ToolRegistry
+from swagent.tools.domain import EmissionCalculator
 
-async def main():
-    # 创建编排器
-    orchestrator = Orchestrator()
-    
-    # 注册Agent
-    planner = PlannerAgent()
-    orchestrator.register_agent(planner, is_primary=True)
-    
-    # 启动编排器
-    await orchestrator.start()
-    
-    # 创建任务
-    task = TaskDefinition(
-        task_id="task_001",
-        name="固废碳排放分析",
-        description="分析某城市的生活垃圾处理碳排放",
-        input_data={"city": "示例城市", "total_waste": 1000}
-    )
-    
-    # 执行任务
-    result = await orchestrator.execute(task)
-    print(f"任务结果: {result.output}")
-    
-    # 停止编排器
-    await orchestrator.stop()
+# 创建工具注册中心
+registry = ToolRegistry()
 
-asyncio.run(main())
+# 注册工具
+calculator = EmissionCalculator()
+registry.register(calculator)
+
+# 使用工具
+result = await registry.execute_tool(
+    "emission_calculator",
+    waste_type="food_waste",
+    treatment_method="composting",
+    quantity=100
+)
+
+print(f"碳排放: {result.data['total_emission_kgCO2e']} kg CO2e")
 ```
 
-### 3. 使用领域工具
+### 3. 使用领域知识库
 
 ```python
-from swagent.tools.domain.emission_calculator import EmissionCalculator
+from swagent.domain import get_knowledge_base, get_terminology_db
 
-async def main():
-    calculator = EmissionCalculator()
-    
-    result = await calculator.execute(
-        waste_type="food_waste",
-        treatment_method="composting",
-        quantity=100,
-        include_transport=True,
-        transport_distance=50
-    )
-    
-    if result.success:
-        print(f"总排放量: {result.data['total_emission_kgCO2e']} kg CO2e")
-    else:
-        print(f"错误: {result.error}")
+# 知识库查询
+kb = get_knowledge_base()
+food_waste = kb.get_waste_category('food_waste')
+print(f"适合的处理方式: {food_waste['suitable_treatments']}")
 
-asyncio.run(main())
+# 术语翻译
+term_db = get_terminology_db()
+translation = term_db.translate('MSW', 'zh')
+print(f"MSW = {translation}")
 ```
 
-## 🔧 配置说明
+### 4. 执行工作流
 
-### 配置文件 (config.yaml)
+```python
+from swagent.workflows import get_workflow_manager
 
-主配置文件位于项目根目录的 `config.yaml`，包含以下配置项：
+# 获取工作流管理器
+manager = get_workflow_manager()
 
-- **LLM配置**: 模型选择、API密钥、超时等
-- **Agent配置**: 默认参数、预定义Agent设置
-- **工具配置**: 启用的工具、工具特定参数
-- **领域配置**: 固废领域知识库路径、分类方法等
-- **日志配置**: 日志级别、输出格式、文件位置
-- **存储配置**: 数据存储方式（本地/Redis/MongoDB）
+# 执行科研工作流
+result = await manager.execute_workflow(
+    'research',
+    initial_context={
+        'research_topic': '固体废物厌氧消化技术',
+        'keywords': ['厌氧消化', '沼气', '有机废物']
+    }
+)
 
-详细配置说明请参考 [INSTALLATION.md](INSTALLATION.md)。
+print(f"完成率: {result.completion_rate * 100}%")
+```
 
-### 环境变量
+## 📖 核心功能
 
-必需的环境变量：
+### Agent系统
 
-- `OPENAI_API_KEY`: OpenAI API密钥（使用OpenAI模型时）
+```python
+# 1. PlannerAgent - 任务规划
+from swagent.agent import PlannerAgent
 
-可选的环境变量：
+planner = PlannerAgent("规划师", llm=llm)
+plan = await planner.plan("设计一个厨余垃圾处理方案")
 
-- `SWAGENT_LOG_LEVEL`: 日志级别（DEBUG/INFO/WARNING/ERROR）
-- `SWAGENT_DATA_PATH`: 数据存储路径
+# 2. ReActAgent - 推理-行动循环
+from swagent.agent import ReActAgent
 
-## 📖 核心概念
+react = ReActAgent("分析师", llm=llm)
+result = await react.execute("分析填埋和焚烧的优缺点")
 
-### Agent
+# 3. 多Agent协作
+from swagent.agent import Orchestrator
 
-Agent是框架的基本执行单元，每个Agent有特定的职责和专长：
+orchestrator = Orchestrator(llm=llm)
+orchestrator.add_agent(planner)
+orchestrator.add_agent(react)
 
-- **PlannerAgent**: 任务规划，分解复杂任务
-- **CoderAgent**: 代码生成与执行
-- **WriterAgent**: 文档和报告撰写
-- **ResearcherAgent**: 文献检索和研究
-- **DataAgent**: 数据分析和处理
-- **ReviewerAgent**: 内容审核和质量控制
+result = await orchestrator.debate(
+    "应该优先选择填埋还是焚烧？",
+    rounds=2
+)
+```
 
-### 消息系统
+### 工具调用
 
-Agent之间通过消息进行通信，支持多种消息类型：
+```python
+# 1. 排放计算
+from swagent.tools.domain import EmissionCalculator
 
-- REQUEST/RESPONSE: 请求-响应模式
-- TASK/TASK_RESULT: 任务分配
-- QUERY/INFORM: 查询和通知
-- SYSTEM/ERROR: 系统消息和错误
+calculator = EmissionCalculator()
+result = await calculator.execute(
+    waste_type="plastic",
+    treatment_method="recycling",
+    quantity=100,
+    include_transport=True,
+    transport_distance=20
+)
 
-### 编排器 (Orchestrator)
+# 2. LCA分析
+from swagent.tools.domain import LCAAnalyzer
 
-编排器负责协调多个Agent的协作，支持多种编排模式：
+analyzer = LCAAnalyzer()
+result = await analyzer.execute(
+    treatment_method="recycling",
+    quantity=100,
+    impact_categories=["climate_change", "energy_consumption"]
+)
 
-- **Sequential**: 顺序执行
-- **Parallel**: 并行执行
-- **Hierarchical**: 层级执行（有主Agent）
-- **Collaborative**: 自由协作
+# 3. 数据可视化
+from swagent.tools.domain import Visualizer
 
-### 工具系统
+visualizer = Visualizer()
+result = await visualizer.execute(
+    chart_type="bar",
+    data={"labels": ["填埋", "焚烧", "回收"], "values": [580, 450, -800]},
+    title="不同处理方式的碳排放"
+)
+```
 
-工具系统提供Agent可调用的功能：
+### 领域知识
 
-- **内置工具**: 代码执行、文件处理、网络搜索等
-- **领域工具**: 排放计算、LCA分析、废物分类等
+```python
+# 1. 知识库查询
+from swagent.domain import get_knowledge_base
+
+kb = get_knowledge_base()
+
+# 获取处理方法
+method = kb.get_treatment_method('anaerobic_digestion')
+print(method['advantages'])
+
+# 比较处理方式
+comparison = kb.compare_treatments('food_waste')
+
+# 搜索
+results = kb.search_by_keyword('回收')
+
+# 2. 术语库
+from swagent.domain import get_terminology_db
+
+term_db = get_terminology_db()
+
+# 翻译术语
+term_db.translate('WTE', 'zh')  # 垃圾焚烧发电
+
+# 展开缩写
+term_db.expand_abbreviation('LCA', 'zh')  # 生命周期评估
+
+# 解释术语
+explanation = term_db.explain_term('biogas', detailed=True)
+
+# 3. 标准规范
+from swagent.domain import get_standards_db
+
+std_db = get_standards_db()
+
+# 查询标准
+standard = std_db.get_standard('GB18485-2014')
+print(standard['key_requirements']['emission_limits'])
+
+# 查询政策
+policy = std_db.get_policy('carbon_neutrality_target')
+
+# 最佳实践
+practice = std_db.get_best_practice('circular_economy')
+```
+
+### 工作流模板
+
+```python
+from swagent.workflows import (
+    ResearchWorkflow,
+    ReportWorkflow,
+    DataAnalysisWorkflow,
+    CodingWorkflow
+)
+
+# 1. 科研工作流
+research_wf = ResearchWorkflow()
+result = await research_wf.execute({
+    'research_topic': '固废处理技术',
+    'keywords': ['技术', '环境', '经济']
+})
+
+# 2. 报告工作流
+report_wf = ReportWorkflow()
+result = await report_wf.execute({
+    'report_type': 'technical',
+    'report_purpose': '年度总结'
+})
+
+# 3. 数据分析工作流
+analysis_wf = DataAnalysisWorkflow()
+result = await analysis_wf.execute({
+    'data_source': 'data.csv',
+    'file_format': 'csv'
+})
+
+# 4. 代码开发工作流
+coding_wf = CodingWorkflow()
+result = await coding_wf.execute({
+    'feature_request': '实现资源管理API'
+})
+```
+
+## 📊 示例项目
+
+完整示例请查看 `examples/` 目录：
+
+- `01_basic_agent_demo.py` - Agent基础使用
+- `02_multi_agent_demo.py` - 多Agent协作
+- `03_tool_calling_demo.py` - 工具调用演示
+- `04_domain_enhancement_demo.py` - 领域增强演示
+
+运行示例：
+
+```bash
+python examples/01_basic_agent_demo.py
+```
 
 ## 🧪 测试
 
-运行测试：
+运行测试套件：
 
 ```bash
 # 运行所有测试
 python -m pytest tests/
 
-# 运行特定测试
-python -m pytest tests/test_agents.py
-
-# 运行示例
-python examples/01_simple_chat.py
-python examples/04_multi_agent.py
+# 运行特定阶段测试
+python tests/test_phase1_llm.py          # LLM接口层
+python tests/test_phase2_agents.py       # Agent系统
+python tests/test_phase3_multi_agent.py  # 多Agent协作
+python tests/test_phase4_tools.py        # 工具系统
+python tests/test_phase4_domain.py       # 领域增强
+python tests/test_phase5_workflows.py    # 工作流模板
 ```
 
-## 📊 开发路线图
+## 📚 文档
 
-- [x] Phase 1: 项目结构设计
-- [ ] Phase 2: 核心框架实现
-- [ ] Phase 3: Agent实现
-- [ ] Phase 4: 工具系统完善
-- [ ] Phase 5: 领域知识集成
-- [ ] Phase 6: 工作流模板
-- [ ] Phase 7: Web UI界面
-- [ ] Phase 8: 文档和示例完善
+详细文档请查看 `docs/` 目录：
 
-详细路线图请参考 [.trae.md](.trae.md) 文档。
+- [用户指南](docs/user_guide.md) - 完整使用指南
+- [API参考](docs/api_reference.md) - API文档
+- [架构设计](docs/architecture.md) - 系统架构说明
+- [开发指南](docs/development.md) - 开发者指南
 
-## 🤝 贡献指南
+## 🛣️ 路线图
 
-欢迎贡献代码、报告问题或提出建议！
+### 已完成 ✅
+- [x] Phase 1: LLM接口层
+- [x] Phase 2: Agent基础框架
+- [x] Phase 3: 多Agent协作
+- [x] Phase 4: 工具系统
+- [x] Phase 4: 领域增强
+- [x] Phase 5: 工作流模板
 
+### 计划中 📋
+- [ ] Phase 6: 高级功能
+  - [ ] 多模型支持（Anthropic, Cohere等）
+  - [ ] 持久化存储（对话历史、知识库更新）
+  - [ ] Web UI界面
+  - [ ] API服务
+  - [ ] 监控和日志系统
+- [ ] 性能优化
+- [ ] 更多领域工具
+- [ ] 更多工作流模板
+
+## 🤝 贡献
+
+欢迎贡献！请查看 [CONTRIBUTING.md](CONTRIBUTING.md) 了解如何参与项目。
+
+### 贡献方式
 1. Fork 项目
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
 3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
 4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 打开 Pull Request
+5. 提交 Pull Request
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件。
-
-## 📮 联系方式
-
-如有问题或建议，请通过以下方式联系：
-
-- Issue: [GitHub Issues](https://github.com/yourusername/solidwaste-agent/issues)
-- Email: your.email@example.com
+本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
 
 ## 🙏 致谢
 
-本项目受以下框架启发：
+- OpenAI - GPT模型和Function Calling
+- IPCC - 温室气体排放因子数据
+- ISO - LCA标准（ISO 14040/14044）
+- 中国国家标准 - 固废管理标准规范
 
-- [LangChain](https://python.langchain.com/)
-- [AutoGen](https://microsoft.github.io/autogen/)
-- [MetaGPT](https://github.com/geekan/MetaGPT)
+## 📞 联系方式
+
+- 项目主页: [https://github.com/yourusername/swagent](https://github.com/yourusername/swagent)
+- Issues: [https://github.com/yourusername/swagent/issues](https://github.com/yourusername/swagent/issues)
+
+## 🌟 Star History
+
+如果这个项目对你有帮助，请给它一个 ⭐️！
 
 ---
 
-**注意**: 本项目目前处于开发阶段，API可能会发生变化。
+**Built with ❤️ for sustainable waste management**

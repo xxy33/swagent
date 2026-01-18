@@ -1,0 +1,334 @@
+{
+  "standards": {
+    "china_national_standards": {
+      "GB18485-2014": {
+        "full_name": "生活垃圾焚烧污染控制标准",
+        "full_name_en": "Standard for Pollution Control on the Municipal Solid Waste Incineration",
+        "issue_date": "2014-07-01",
+        "effective_date": "2014-07-01",
+        "scope": "规定了生活垃圾焚烧厂的选址要求、技术要求、污染物排放限值、监测要求等",
+        "key_requirements": {
+          "emission_limits": {
+            "particulate_matter": "30 mg/m³",
+            "SO2": "100 mg/m³",
+            "NOx": "300 mg/m³",
+            "HCl": "60 mg/m³",
+            "CO": "100 mg/m³",
+            "dioxins": "0.1 ng TEQ/m³"
+          },
+          "temperature": "炉膛内焚烧温度应≥850°C",
+          "residence_time": "烟气停留时间≥2秒"
+        },
+        "category": "emission_standard"
+      },
+      "GB16889-2008": {
+        "full_name": "生活垃圾填埋场污染控制标准",
+        "full_name_en": "Standard for Pollution Control on the Landfill Site of Municipal Solid Waste",
+        "issue_date": "2008-04-16",
+        "effective_date": "2008-07-01",
+        "scope": "规定了生活垃圾填埋场的选址、设计、运行、封场及监测的污染控制要求",
+        "key_requirements": {
+          "liner_system": "必须设置防渗系统",
+          "leachate_collection": "必须设置渗滤液收集系统",
+          "gas_collection": "必须设置填埋气体收集系统",
+          "groundwater_monitoring": "必须设置地下水监测井"
+        },
+        "category": "pollution_control"
+      },
+      "GB50869-2013": {
+        "full_name": "生活垃圾卫生填埋处理技术规范",
+        "full_name_en": "Code for Sanitary Landfilling of Municipal Solid Waste",
+        "scope": "生活垃圾卫生填埋场的设计、施工、运行和封场",
+        "category": "technical_specification"
+      },
+      "GB/T19095-2019": {
+        "full_name": "生活垃圾分类标志",
+        "full_name_en": "Standard for Classification Symbols of Municipal Solid Waste",
+        "issue_date": "2019-11-15",
+        "effective_date": "2019-12-01",
+        "scope": "规定了生活垃圾分类标志的适用范围、类别构成、图形符号",
+        "classification": ["可回收物", "有害垃圾", "厨余垃圾", "其他垃圾"],
+        "category": "classification_standard"
+      },
+      "GB/T25175-2010": {
+        "full_name": "城市生活垃圾分类及其评价标准",
+        "full_name_en": "Classification and Evaluation Standard of Municipal Solid Waste",
+        "scope": "城市生活垃圾的分类方法和分类评价标准",
+        "category": "classification_standard"
+      },
+      "GB/T23485-2009": {
+        "full_name": "城市生活垃圾热值测定方法",
+        "full_name_en": "Test Methods for Calorific Value of Municipal Solid Waste",
+        "scope": "生活垃圾热值的测定方法",
+        "category": "test_method"
+      },
+      "HJ2005-2010": {
+        "full_name": "生活垃圾焚烧处理工程技术规范",
+        "issuing_authority": "环境保护部",
+        "scope": "生活垃圾焚烧处理工程的设计、施工、验收和运行管理",
+        "category": "technical_specification"
+      },
+      "CJJ90-2009": {
+        "full_name": "生活垃圾焚烧处理工程技术规范",
+        "issuing_authority": "住建部",
+        "scope": "生活垃圾焚烧厂的工程技术要求",
+        "category": "technical_specification"
+      }
+    },
+    "international_standards": {
+      "ISO14040": {
+        "full_name": "Environmental Management - Life Cycle Assessment - Principles and Framework",
+        "full_name_zh": "环境管理 - 生命周期评估 - 原则和框架",
+        "organization": "ISO (国际标准化组织)",
+        "year": "2006",
+        "scope": "生命周期评估的原则和框架",
+        "key_phases": ["目标和范围定义", "清单分析", "影响评估", "解释"],
+        "category": "assessment_method"
+      },
+      "ISO14044": {
+        "full_name": "Environmental Management - Life Cycle Assessment - Requirements and Guidelines",
+        "full_name_zh": "环境管理 - 生命周期评估 - 要求和指南",
+        "organization": "ISO",
+        "year": "2006",
+        "scope": "生命周期评估的具体要求和指南",
+        "category": "assessment_method"
+      },
+      "ISO14001": {
+        "full_name": "Environmental Management Systems - Requirements with Guidance for Use",
+        "full_name_zh": "环境管理体系 - 要求及使用指南",
+        "organization": "ISO",
+        "year": "2015",
+        "scope": "环境管理体系的建立、实施、保持和改进",
+        "category": "management_system"
+      },
+      "EU_Waste_Framework_Directive_2008_98_EC": {
+        "full_name": "Directive 2008/98/EC on Waste (Waste Framework Directive)",
+        "full_name_zh": "欧盟废物框架指令",
+        "organization": "European Union",
+        "year": "2008",
+        "scope": "欧盟废物管理的总体框架",
+        "key_principles": [
+          "废物层级 (Waste Hierarchy)",
+          "生产者责任延伸 (EPR)",
+          "污染者付费原则"
+        ],
+        "targets": {
+          "recycling_rate_2020": "50% (household and similar waste)",
+          "recovery_rate_2020": "70% (construction waste)"
+        },
+        "category": "directive"
+      },
+      "EU_Landfill_Directive_1999_31_EC": {
+        "full_name": "Council Directive 1999/31/EC on the Landfill of Waste",
+        "full_name_zh": "欧盟填埋指令",
+        "organization": "European Union",
+        "year": "1999",
+        "scope": "填埋场的设计、运营和关闭要求",
+        "targets": {
+          "biodegradable_waste_reduction_2016": "减少至1995年水平的35%"
+        },
+        "category": "directive"
+      },
+      "EU_Industrial_Emissions_Directive_2010_75_EU": {
+        "full_name": "Directive 2010/75/EU on Industrial Emissions (IED)",
+        "full_name_zh": "欧盟工业排放指令",
+        "organization": "European Union",
+        "year": "2010",
+        "scope": "包括焚烧厂在内的工业设施的污染控制",
+        "key_concept": "最佳可行技术 (BAT - Best Available Techniques)",
+        "category": "directive"
+      },
+      "Basel_Convention": {
+        "full_name": "Basel Convention on the Control of Transboundary Movements of Hazardous Wastes and Their Disposal",
+        "full_name_zh": "控制危险废物越境转移及其处置巴塞尔公约",
+        "organization": "United Nations",
+        "year": "1989",
+        "effective_date": "1992-05-05",
+        "scope": "危险废物的越境转移和处置",
+        "key_principles": [
+          "最小化危险废物产生",
+          "就近处置原则",
+          "事先知情同意"
+        ],
+        "category": "international_convention"
+      },
+      "Stockholm_Convention": {
+        "full_name": "Stockholm Convention on Persistent Organic Pollutants",
+        "full_name_zh": "关于持久性有机污染物的斯德哥尔摩公约",
+        "organization": "United Nations",
+        "year": "2001",
+        "scope": "控制和消除持久性有机污染物（POPs），包括二噁英",
+        "category": "international_convention"
+      }
+    },
+    "technical_guidelines": {
+      "IPCC_2006": {
+        "full_name": "2006 IPCC Guidelines for National Greenhouse Gas Inventories",
+        "full_name_zh": "IPCC国家温室气体清单指南（2006年版）",
+        "organization": "IPCC (政府间气候变化专门委员会)",
+        "year": "2006",
+        "scope": "国家温室气体排放清单的编制方法",
+        "waste_section": "Volume 5: Waste",
+        "key_categories": [
+          "固体废物处置",
+          "生物处理",
+          "焚烧和露天焚烧",
+          "废水处理和排放"
+        ],
+        "emission_factors_provided": true,
+        "category": "emission_guideline"
+      },
+      "IPCC_2019_Refinement": {
+        "full_name": "2019 Refinement to the 2006 IPCC Guidelines",
+        "full_name_zh": "2006年IPCC指南2019修订版",
+        "organization": "IPCC",
+        "year": "2019",
+        "scope": "对2006年指南的更新和完善",
+        "category": "emission_guideline"
+      },
+      "US_EPA_AP42": {
+        "full_name": "Compilation of Air Pollutant Emission Factors",
+        "organization": "US EPA (美国环保署)",
+        "scope": "各类污染源的空气污染物排放因子",
+        "waste_combustion_section": "Section 2.1 - Refuse Combustion",
+        "category": "emission_factor"
+      },
+      "GHG_Protocol": {
+        "full_name": "Greenhouse Gas Protocol",
+        "full_name_zh": "温室气体核算体系",
+        "organization": "WRI & WBCSD",
+        "scope": "企业和组织的温室气体核算和报告标准",
+        "scopes": {
+          "scope1": "直接排放",
+          "scope2": "能源间接排放",
+          "scope3": "其他间接排放"
+        },
+        "category": "accounting_standard"
+      }
+    },
+    "industry_standards": {
+      "CJ/T3059-1996": {
+        "full_name": "生活垃圾采样和分析方法",
+        "issuing_authority": "建设部",
+        "scope": "生活垃圾的采样和物理化学分析方法",
+        "category": "test_method"
+      },
+      "CJ/T227-2015": {
+        "full_name": "生活垃圾收集站技术规程",
+        "scope": "生活垃圾收集站的设计、建设和运行",
+        "category": "technical_specification"
+      },
+      "CJ/T313-2009": {
+        "full_name": "生活垃圾采样和物理分析方法",
+        "scope": "生活垃圾的采样和物理成分分析",
+        "category": "test_method"
+      }
+    }
+  },
+  "regulations": {
+    "china_laws": {
+      "environmental_protection_law": {
+        "full_name": "中华人民共和国环境保护法",
+        "year": "2014年修订",
+        "effective_date": "2015-01-01",
+        "scope": "环境保护的基本法律",
+        "key_articles": {
+          "article_4": "保护优先、预防为主、综合治理、公众参与、损害担责",
+          "article_25": "企业事业单位应当按照国家有关规定制定突发环境事件应急预案"
+        }
+      },
+      "solid_waste_pollution_prevention_law": {
+        "full_name": "中华人民共和国固体废物污染环境防治法",
+        "year": "2020年修订",
+        "effective_date": "2020-09-01",
+        "scope": "固体废物污染环境的防治",
+        "key_principles": [
+          "减量化、资源化、无害化",
+          "污染者责任原则",
+          "生产者责任延伸制度"
+        ],
+        "key_provisions": {
+          "waste_classification": "国家推行生活垃圾分类制度",
+          "EPR": "国家建立电器电子、铅蓄电池、车用动力电池等产品的生产者责任延伸制度",
+          "plastic_ban": "禁止、限制生产、销售和使用不可降解塑料袋等一次性塑料制品"
+        }
+      },
+      "circular_economy_promotion_law": {
+        "full_name": "中华人民共和国循环经济促进法",
+        "year": "2008",
+        "effective_date": "2009-01-01",
+        "scope": "促进循环经济发展",
+        "key_principles": ["减量化、再利用、资源化"]
+      }
+    },
+    "local_regulations": {
+      "shanghai_waste_classification": {
+        "full_name": "上海市生活垃圾管理条例",
+        "effective_date": "2019-07-01",
+        "classification": ["可回收物", "有害垃圾", "湿垃圾", "干垃圾"],
+        "enforcement": "强制分类，违反者将受到处罚",
+        "significance": "中国首部生活垃圾管理地方性法规"
+      },
+      "beijing_waste_classification": {
+        "full_name": "北京市生活垃圾管理条例",
+        "effective_date": "2020-05-01",
+        "classification": ["可回收物", "有害垃圾", "厨余垃圾", "其他垃圾"]
+      }
+    },
+    "policies": {
+      "plastic_ban_policy": {
+        "full_name": "关于进一步加强塑料污染治理的意见",
+        "issuing_authority": "国家发改委、生态环境部",
+        "year": "2020",
+        "key_targets": {
+          "2020": "禁止生产和销售一次性发泡塑料餐具、一次性塑料棉签",
+          "2022": "禁止销售含塑料微珠的日化产品",
+          "2025": "塑料制品生产、流通、消费和回收处置等环节的管理制度基本建立"
+        }
+      },
+      "carbon_neutrality_target": {
+        "full_name": "碳达峰碳中和目标",
+        "announcement": "2020年9月",
+        "targets": {
+          "carbon_peak": "2030年前实现碳达峰",
+          "carbon_neutrality": "2060年前实现碳中和"
+        },
+        "relevance_to_waste": "垃圾处理是重要的碳排放源，需要优化处理方式以减少排放"
+      }
+    }
+  },
+  "best_practices": {
+    "zero_waste": {
+      "name": "零废弃",
+      "name_en": "Zero Waste",
+      "definition": "通过重新设计产品和流程，最大限度地减少废物产生和填埋",
+      "principles": ["拒绝", "减少", "重复使用", "回收", "堆肥"],
+      "target": "90%以上的废物转移出填埋场和焚烧厂"
+    },
+    "circular_economy": {
+      "name": "循环经济",
+      "name_en": "Circular Economy",
+      "definition": "一种旨在消除废物和持续使用资源的经济模式",
+      "key_strategies": [
+        "设计出废物 (Design out waste)",
+        "延长产品寿命",
+        "材料循环利用",
+        "可再生能源"
+      ]
+    },
+    "waste_to_resource": {
+      "name": "变废为宝",
+      "strategies": [
+        "能源回收（焚烧发电）",
+        "材料回收（回收利用）",
+        "生物转化（堆肥、厌氧消化）",
+        "化学转化（热解、气化）"
+      ]
+    }
+  },
+  "categories": {
+    "standards": ["emission_standard", "pollution_control", "technical_specification", "classification_standard", "test_method", "assessment_method", "management_system", "directive"],
+    "regulations": ["national_law", "local_regulation", "policy"],
+    "guidelines": ["emission_guideline", "emission_factor", "accounting_standard"]
+  }
+}

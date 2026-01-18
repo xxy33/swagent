@@ -1,0 +1,177 @@
+{
+  "treatment_methods": {
+    "landfill": {
+      "name_zh": "填埋",
+      "name_en": "Landfilling",
+      "description": "将废物填埋于地下的处理方式",
+      "types": {
+        "sanitary_landfill": {
+          "name_zh": "卫生填埋",
+          "description": "设有防渗系统、渗滤液收集处理系统、填埋气体收集系统的规范填埋场",
+          "advantages": ["成本较低", "技术成熟", "适用范围广"],
+          "disadvantages": ["占地面积大", "产生温室气体", "可能污染地下水"],
+          "ghg_emission": "高",
+          "land_requirement": "高"
+        },
+        "simple_landfill": {
+          "name_zh": "简易填埋",
+          "description": "缺乏完善环保设施的填埋",
+          "status": "逐步淘汰"
+        }
+      },
+      "environmental_impacts": {
+        "leachate": "需要处理",
+        "landfill_gas": "主要是CH4和CO2",
+        "land_use": "永久占用土地资源"
+      },
+      "applicable_waste": ["其他垃圾", "建筑垃圾", "稳定化危废"]
+    },
+    "incineration": {
+      "name_zh": "焚烧",
+      "name_en": "Incineration",
+      "description": "在高温下燃烧废物的处理方式",
+      "types": {
+        "wte": {
+          "name_zh": "垃圾焚烧发电",
+          "name_en": "Waste-to-Energy",
+          "description": "焚烧垃圾并回收能源",
+          "temperature": "850-1100°C",
+          "energy_recovery": "可发电或供热",
+          "volume_reduction": "90%",
+          "advantages": ["减量化效果好", "能源回收", "占地少"],
+          "disadvantages": ["投资成本高", "需要严格污染控制", "飞灰需特殊处理"]
+        }
+      },
+      "pollution_control": {
+        "flue_gas": ["脱硫", "脱硝", "除尘", "二噁英控制"],
+        "bottom_ash": "可用于建材",
+        "fly_ash": "危险废物，需固化处理"
+      },
+      "emission_standards": {
+        "china_gb18485": "生活垃圾焚烧污染控制标准",
+        "eu_directive": "欧盟工业排放指令"
+      },
+      "applicable_waste": ["生活垃圾", "医疗废物", "部分工业废物"]
+    },
+    "composting": {
+      "name_zh": "堆肥",
+      "name_en": "Composting",
+      "description": "利用微生物分解有机废物的生物处理方式",
+      "types": {
+        "aerobic_composting": {
+          "name_zh": "好氧堆肥",
+          "description": "在有氧条件下进行",
+          "process_time": "30-90天",
+          "temperature": "55-65°C",
+          "products": "有机肥料"
+        },
+        "vermicomposting": {
+          "name_zh": "蚯蚓堆肥",
+          "description": "利用蚯蚓加速分解",
+          "advantages": ["产品质量高", "无需高温"]
+        }
+      },
+      "advantages": ["资源化利用", "改良土壤", "减少温室气体排放"],
+      "disadvantages": ["需要场地", "周期较长", "可能产生臭味"],
+      "applicable_waste": ["厨余垃圾", "园林绿化垃圾", "农业有机废物"],
+      "product_uses": ["土壤改良", "园林绿化", "农业种植"]
+    },
+    "anaerobic_digestion": {
+      "name_zh": "厌氧消化",
+      "name_en": "Anaerobic Digestion",
+      "description": "在无氧条件下微生物分解有机物并产生沼气",
+      "process": {
+        "hydrolysis": "水解",
+        "acidogenesis": "产酸",
+        "methanogenesis": "产甲烷"
+      },
+      "products": {
+        "biogas": {
+          "composition": "CH4 50-70%, CO2 30-50%",
+          "uses": ["发电", "供热", "车用燃料"]
+        },
+        "digestate": {
+          "uses": ["有机肥料", "土壤改良剂"]
+        }
+      },
+      "advantages": ["能源回收", "减少温室气体", "产品价值高"],
+      "applicable_waste": ["厨余垃圾", "畜禽粪便", "污水污泥"]
+    },
+    "recycling": {
+      "name_zh": "回收利用",
+      "name_en": "Recycling",
+      "description": "将废物转化为新产品或原材料",
+      "material_specific": {
+        "paper_recycling": {
+          "process": ["收集", "分类", "制浆", "造纸"],
+          "cycles": "5-7次",
+          "energy_saving": "40-60%"
+        },
+        "plastic_recycling": {
+          "mechanical_recycling": "物理回收",
+          "chemical_recycling": "化学回收",
+          "challenges": ["混合塑料分离", "质量降级"]
+        },
+        "metal_recycling": {
+          "energy_saving": "铝95%, 钢60%",
+          "infinite_cycles": true
+        },
+        "glass_recycling": {
+          "energy_saving": "25-30%",
+          "quality": "可保持原质量"
+        }
+      },
+      "environmental_benefits": {
+        "resource_conservation": "节约原生资源",
+        "energy_saving": "减少能源消耗",
+        "emission_reduction": "减少温室气体排放"
+      }
+    },
+    "mechanical_biological_treatment": {
+      "name_zh": "机械生物处理",
+      "name_en": "Mechanical-Biological Treatment (MBT)",
+      "description": "结合机械分选和生物处理的综合处理方式",
+      "components": {
+        "mechanical": ["破碎", "筛分", "磁选", "风选"],
+        "biological": ["堆肥", "厌氧消化", "生物干化"]
+      },
+      "advantages": ["综合处理", "资源回收率高", "减少填埋量"],
+      "applicable_waste": ["混合生活垃圾"]
+    }
+  },
+  "waste_hierarchy": {
+    "description": "废物管理优先级顺序",
+    "levels": [
+      {
+        "priority": 1,
+        "name_zh": "预防",
+        "name_en": "Prevention",
+        "description": "减少废物产生"
+      },
+      {
+        "priority": 2,
+        "name_zh": "再使用",
+        "name_en": "Reuse",
+        "description": "延长产品使用寿命"
+      },
+      {
+        "priority": 3,
+        "name_zh": "回收",
+        "name_en": "Recycling",
+        "description": "物质回收利用"
+      },
+      {
+        "priority": 4,
+        "name_zh": "能源回收",
+        "name_en": "Energy Recovery",
+        "description": "焚烧发电等"
+      },
+      {
+        "priority": 5,
+        "name_zh": "处置",
+        "name_en": "Disposal",
+        "description": "填埋等最终处置"
+      }
+    ]
+  }
+}

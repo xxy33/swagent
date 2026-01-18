@@ -1,0 +1,115 @@
+{
+  "waste_categories": {
+    "municipal_solid_waste": {
+      "name_zh": "城市生活垃圾",
+      "name_en": "Municipal Solid Waste (MSW)",
+      "description": "城市日常生活中或为城市日常生活提供服务的活动中产生的固体废物",
+      "subcategories": {
+        "food_waste": {
+          "name_zh": "厨余垃圾",
+          "name_en": "Food Waste",
+          "description": "包括剩菜剩饭、果皮、菜叶等有机物",
+          "composition": ["碳水化合物", "蛋白质", "脂肪", "纤维素"],
+          "moisture_content": "60-80%",
+          "suitable_treatments": ["composting", "anaerobic_digestion", "incineration"]
+        },
+        "recyclables": {
+          "name_zh": "可回收物",
+          "name_en": "Recyclables",
+          "description": "适宜回收和资源化利用的废物",
+          "subcategories": {
+            "paper": {
+              "name_zh": "纸类",
+              "examples": ["报纸", "纸箱", "书本", "办公用纸"],
+              "recycling_rate": "70-85%"
+            },
+            "plastic": {
+              "name_zh": "塑料",
+              "examples": ["塑料瓶", "塑料袋", "塑料容器"],
+              "types": ["PET", "HDPE", "PVC", "LDPE", "PP", "PS"],
+              "recycling_rate": "20-30%"
+            },
+            "metal": {
+              "name_zh": "金属",
+              "examples": ["铝罐", "铁罐", "铜制品"],
+              "recycling_rate": "80-95%"
+            },
+            "glass": {
+              "name_zh": "玻璃",
+              "examples": ["玻璃瓶", "玻璃罐"],
+              "recycling_rate": "70-90%"
+            }
+          }
+        },
+        "hazardous_waste": {
+          "name_zh": "有害垃圾",
+          "name_en": "Hazardous Waste",
+          "description": "含有有害物质，需要特殊处理的废物",
+          "examples": ["电池", "荧光灯管", "过期药品", "油漆"],
+          "special_handling": true,
+          "disposal_methods": ["专业处置", "焚烧", "固化填埋"]
+        },
+        "other_waste": {
+          "name_zh": "其他垃圾",
+          "name_en": "Residual Waste",
+          "description": "除可回收物、有害垃圾、厨余垃圾之外的其他生活垃圾",
+          "examples": ["烟蒂", "陶瓷", "尘土"],
+          "typical_treatment": "landfill"
+        }
+      }
+    },
+    "industrial_waste": {
+      "name_zh": "工业固体废物",
+      "name_en": "Industrial Solid Waste",
+      "description": "工业生产过程中产生的固体废物",
+      "subcategories": {
+        "general_industrial_waste": {
+          "name_zh": "一般工业固废",
+          "examples": ["废钢铁", "废木材", "废纸", "废塑料"]
+        },
+        "industrial_hazardous_waste": {
+          "name_zh": "工业危险废物",
+          "examples": ["废酸", "废碱", "重金属污泥", "废溶剂"],
+          "regulation": "需按危险废物管理"
+        }
+      }
+    },
+    "construction_waste": {
+      "name_zh": "建筑垃圾",
+      "name_en": "Construction and Demolition Waste",
+      "description": "建设、施工、装修、拆除等过程中产生的废物",
+      "composition": {
+        "concrete": "40-50%",
+        "brick": "20-30%",
+        "wood": "5-10%",
+        "metal": "5-10%",
+        "other": "10-20%"
+      },
+      "recycling_potential": "high",
+      "common_uses": ["回填", "制砖", "路基材料"]
+    },
+    "agricultural_waste": {
+      "name_zh": "农业废弃物",
+      "name_en": "Agricultural Waste",
+      "description": "农业生产过程中产生的废弃物",
+      "examples": ["秸秆", "畜禽粪便", "农膜"],
+      "resource_potential": {
+        "biogas": "高",
+        "organic_fertilizer": "高",
+        "biomass_energy": "中"
+      }
+    }
+  },
+  "classification_systems": {
+    "china_4_categories": {
+      "name": "中国四分类法",
+      "categories": ["可回收物", "厨余垃圾", "有害垃圾", "其他垃圾"],
+      "implementation_year": 2019,
+      "cities": ["上海", "北京", "深圳", "广州"]
+    },
+    "european_waste_framework": {
+      "name": "欧盟废物框架指令",
+      "key_principles": ["废物层级", "生产者责任", "循环经济"]
+    }
+  }
+}

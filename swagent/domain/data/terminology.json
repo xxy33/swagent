@@ -1,0 +1,293 @@
+{
+  "terminology": {
+    "waste_management": {
+      "MSW": {
+        "full_name_en": "Municipal Solid Waste",
+        "full_name_zh": "城市生活垃圾",
+        "definition": "城市日常生活中或为城市日常生活提供服务的活动中产生的固体废物",
+        "category": "waste_types"
+      },
+      "WTE": {
+        "full_name_en": "Waste-to-Energy",
+        "full_name_zh": "垃圾焚烧发电",
+        "definition": "通过焚烧垃圾产生热能，并转化为电能的技术",
+        "category": "treatment_technology"
+      },
+      "LCA": {
+        "full_name_en": "Life Cycle Assessment",
+        "full_name_zh": "生命周期评估",
+        "definition": "评估产品或服务在整个生命周期中对环境影响的方法",
+        "category": "assessment_method"
+      },
+      "MBT": {
+        "full_name_en": "Mechanical-Biological Treatment",
+        "full_name_zh": "机械生物处理",
+        "definition": "结合机械分选和生物处理的综合废物处理技术",
+        "category": "treatment_technology"
+      },
+      "GHG": {
+        "full_name_en": "Greenhouse Gas",
+        "full_name_zh": "温室气体",
+        "definition": "能够吸收和重新辐射红外辐射的大气气体，导致温室效应",
+        "category": "environmental_impact"
+      },
+      "EPR": {
+        "full_name_en": "Extended Producer Responsibility",
+        "full_name_zh": "生产者责任延伸",
+        "definition": "生产者对其产品承担的资源环境责任从生产环节延伸到产品使用、回收、循环利用和最终处置等环节",
+        "category": "policy"
+      },
+      "3R": {
+        "full_name_en": "Reduce, Reuse, Recycle",
+        "full_name_zh": "减量化、再利用、再循环",
+        "definition": "循环经济的三个核心原则",
+        "category": "principles"
+      },
+      "IPCC": {
+        "full_name_en": "Intergovernmental Panel on Climate Change",
+        "full_name_zh": "政府间气候变化专门委员会",
+        "definition": "联合国气候变化评估机构，制定温室气体排放指南",
+        "category": "organization"
+      }
+    },
+    "technical_terms": {
+      "leachate": {
+        "term_zh": "渗滤液",
+        "definition": "垃圾在堆放和填埋过程中由于压实、发酵等产生的污水",
+        "related_terms": ["landfill", "pollution_control"]
+      },
+      "biogas": {
+        "term_zh": "沼气",
+        "definition": "有机物在厌氧条件下经微生物发酵产生的可燃气体，主要成分为甲烷和二氧化碳",
+        "composition": "CH4 50-70%, CO2 30-50%",
+        "related_terms": ["anaerobic_digestion", "renewable_energy"]
+      },
+      "fly_ash": {
+        "term_zh": "飞灰",
+        "definition": "垃圾焚烧过程中烟气携带的细小颗粒物，含有重金属和二噁英等有害物质",
+        "properties": "危险废物",
+        "related_terms": ["incineration", "hazardous_waste"]
+      },
+      "bottom_ash": {
+        "term_zh": "炉渣",
+        "definition": "垃圾焚烧后残留在炉底的固体残渣",
+        "properties": "可用于建材",
+        "related_terms": ["incineration", "resource_recovery"]
+      },
+      "compost": {
+        "term_zh": "堆肥",
+        "definition": "有机废物经微生物分解后形成的富含营养的土壤改良剂",
+        "related_terms": ["composting", "organic_fertilizer"]
+      },
+      "digestate": {
+        "term_zh": "沼渣",
+        "definition": "厌氧消化后的固体残留物，可作为有机肥料",
+        "related_terms": ["anaerobic_digestion", "organic_fertilizer"]
+      },
+      "source_separation": {
+        "term_zh": "源头分类",
+        "definition": "在废物产生源头进行分类收集",
+        "related_terms": ["waste_classification", "recycling"]
+      },
+      "sanitary_landfill": {
+        "term_zh": "卫生填埋",
+        "definition": "具有防渗、渗滤液处理、气体收集等设施的规范填埋场",
+        "related_terms": ["landfill", "environmental_protection"]
+      },
+      "emission_factor": {
+        "term_zh": "排放因子",
+        "definition": "单位活动量的污染物排放量，用于计算温室气体排放",
+        "unit": "kg CO2e/unit",
+        "related_terms": ["GHG", "carbon_accounting"]
+      },
+      "CO2e": {
+        "term_zh": "二氧化碳当量",
+        "full_name_en": "Carbon Dioxide Equivalent",
+        "definition": "将不同温室气体的效应统一换算为二氧化碳的当量值",
+        "related_terms": ["GHG", "climate_change"]
+      },
+      "calorific_value": {
+        "term_zh": "热值",
+        "definition": "单位质量燃料完全燃烧时释放的热量",
+        "unit": "MJ/kg",
+        "related_terms": ["incineration", "energy_recovery"]
+      },
+      "moisture_content": {
+        "term_zh": "含水率",
+        "definition": "废物中水分占总重量的百分比",
+        "unit": "%",
+        "related_terms": ["waste_properties", "treatment_selection"]
+      },
+      "volume_reduction": {
+        "term_zh": "减容率",
+        "definition": "废物处理后体积减少的比例",
+        "unit": "%",
+        "related_terms": ["incineration", "treatment_efficiency"]
+      },
+      "recycling_rate": {
+        "term_zh": "回收率",
+        "definition": "实际回收量占可回收废物总量的比例",
+        "unit": "%",
+        "related_terms": ["recycling", "resource_recovery"]
+      },
+      "dioxin": {
+        "term_zh": "二噁英",
+        "definition": "一类高毒性的持久性有机污染物，主要来自焚烧过程",
+        "properties": "剧毒、致癌、难降解",
+        "related_terms": ["incineration", "pollution_control"]
+      }
+    },
+    "waste_types": {
+      "food_waste": {
+        "term_zh": "厨余垃圾",
+        "term_en": "Food Waste",
+        "aliases": ["kitchen waste", "organic waste"],
+        "properties": {
+          "moisture_content": "high",
+          "biodegradable": true,
+          "calorific_value": "low"
+        }
+      },
+      "plastic_waste": {
+        "term_zh": "塑料垃圾",
+        "term_en": "Plastic Waste",
+        "types": ["PET", "HDPE", "PVC", "LDPE", "PP", "PS"],
+        "properties": {
+          "moisture_content": "low",
+          "biodegradable": false,
+          "calorific_value": "high"
+        }
+      },
+      "paper_waste": {
+        "term_zh": "废纸",
+        "term_en": "Paper Waste",
+        "properties": {
+          "recyclable": true,
+          "degradable": true,
+          "recycling_cycles": "5-7"
+        }
+      },
+      "metal_waste": {
+        "term_zh": "废金属",
+        "term_en": "Metal Waste",
+        "types": ["ferrous", "non-ferrous"],
+        "properties": {
+          "recyclable": true,
+          "infinite_recycling": true
+        }
+      },
+      "glass_waste": {
+        "term_zh": "废玻璃",
+        "term_en": "Glass Waste",
+        "properties": {
+          "recyclable": true,
+          "quality_retention": "high"
+        }
+      },
+      "e_waste": {
+        "term_zh": "电子废弃物",
+        "term_en": "Electronic Waste",
+        "aliases": ["WEEE"],
+        "properties": {
+          "hazardous_components": true,
+          "valuable_materials": true,
+          "special_handling": true
+        }
+      },
+      "construction_waste": {
+        "term_zh": "建筑垃圾",
+        "term_en": "Construction and Demolition Waste",
+        "aliases": ["C&D waste"],
+        "main_components": ["concrete", "brick", "wood", "metal"]
+      },
+      "hazardous_waste": {
+        "term_zh": "危险废物",
+        "term_en": "Hazardous Waste",
+        "characteristics": ["toxicity", "flammability", "corrosivity", "reactivity"],
+        "regulation": "strict"
+      }
+    },
+    "treatment_methods": {
+      "landfilling": {
+        "term_zh": "填埋",
+        "advantages": ["低成本", "技术成熟"],
+        "disadvantages": ["占地大", "甲烷排放"]
+      },
+      "incineration": {
+        "term_zh": "焚烧",
+        "advantages": ["减容率高", "能源回收"],
+        "disadvantages": ["投资高", "排放控制严格"]
+      },
+      "composting": {
+        "term_zh": "堆肥",
+        "advantages": ["资源化", "改良土壤"],
+        "disadvantages": ["周期长", "适用范围窄"]
+      },
+      "anaerobic_digestion": {
+        "term_zh": "厌氧消化",
+        "advantages": ["产沼气", "减少甲烷排放"],
+        "disadvantages": ["技术要求高"]
+      },
+      "recycling": {
+        "term_zh": "回收利用",
+        "advantages": ["节约资源", "减少排放"],
+        "disadvantages": ["分选成本"]
+      },
+      "pyrolysis": {
+        "term_zh": "热解",
+        "definition": "在无氧或缺氧条件下加热有机物使其分解的过程",
+        "products": ["bio-oil", "syngas", "biochar"]
+      },
+      "gasification": {
+        "term_zh": "气化",
+        "definition": "在高温下将有机物转化为合成气的过程",
+        "products": ["syngas", "H2", "CO"]
+      }
+    },
+    "environmental_indicators": {
+      "carbon_footprint": {
+        "term_zh": "碳足迹",
+        "definition": "某个活动或产品的生命周期内直接和间接产生的温室气体总量",
+        "unit": "kg CO2e"
+      },
+      "energy_recovery_rate": {
+        "term_zh": "能源回收率",
+        "definition": "从废物中回收的能源占废物总能量的比例",
+        "unit": "%"
+      },
+      "diversion_rate": {
+        "term_zh": "分流率",
+        "definition": "从填埋场分流出来进行回收和资源化利用的废物比例",
+        "unit": "%"
+      },
+      "landfill_avoidance": {
+        "term_zh": "填埋避免",
+        "definition": "通过其他处理方式减少进入填埋场的废物量"
+      }
+    },
+    "regulations_and_standards": {
+      "GB18485": {
+        "full_name": "生活垃圾焚烧污染控制标准",
+        "type": "中国国家标准",
+        "scope": "incineration_emission_control"
+      },
+      "Basel_Convention": {
+        "full_name_en": "Basel Convention on the Control of Transboundary Movements of Hazardous Wastes",
+        "full_name_zh": "巴塞尔公约",
+        "scope": "hazardous_waste_international_transport"
+      },
+      "EU_Waste_Framework_Directive": {
+        "full_name": "European Union Waste Framework Directive",
+        "key_concepts": ["waste_hierarchy", "EPR", "circular_economy"]
+      }
+    }
+  },
+  "categories": [
+    "waste_management",
+    "technical_terms",
+    "waste_types",
+    "treatment_methods",
+    "environmental_indicators",
+    "regulations_and_standards"
+  ]
+}
