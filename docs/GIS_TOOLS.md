@@ -194,7 +194,9 @@ asyncio.run(use_with_agent())
 | date_range | array | 否 | - | 日期范围（Sentinel），如 ["2023-01-01", "2023-01-31"] |
 | bands | array | 否 | ["B4", "B3", "B2"] | 波段（Sentinel），默认 RGB |
 | max_cloud_cover | number | 否 | 20 | 最大云量百分比（Sentinel） |
-| return_format | string | 否 | "array" | 返回格式: "array" 或 "base64" |
+| return_format | string | 否 | "array" | 返回格式: "array"（数组信息）, "base64"（编码图片）, "file"（保存到文件） |
+| output_path | string | 否 | "./imagery_output" | 保存路径（仅 return_format='file' 时使用） |
+| filename | string | 否 | 自动生成 | 文件名（仅 return_format='file' 时使用），支持 .png, .jpg, .tiff 格式 |
 
 **返回数据示例**:
 
@@ -277,11 +279,32 @@ img_base64 = result.data['image_base64']
 # 可以直接在网页中显示: <img src="data:image/png;base64,{img_base64}" />
 ```
 
+### 示例 6: 保存影像到本地文件 ✨ **新功能**
+
+```python
+result = await imagery_tool.safe_execute(
+    location=[116.4074, 39.9042],
+    source="google",
+    zoom_level=18,
+    point_size=1000,
+    return_format="file",  # 保存到文件
+    output_path="./satellite_images",  # 输出目录
+    filename="beijing_satellite.png"  # 自定义文件名（可选）
+)
+
+if result.success:
+    print(f"影像已保存到: {result.data['saved_path']}")
+    print(f"文件名: {result.data['filename']}")
+```
+
 ## 运行完整示例
 
 ```bash
 # 运行 GIS Agent 示例
 python examples/gis_agent_demo.py
+
+# 运行影像下载示例（保存到本地文件）
+python examples/imagery_download_demo.py
 ```
 
 该示例包含 4 个演示：

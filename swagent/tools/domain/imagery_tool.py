@@ -134,10 +134,24 @@ class ImageryTool(BaseTool):
             ToolParameter(
                 name="return_format",
                 type="string",
-                description="返回格式: 'array' 返回数组形状信息，'base64' 返回 base64 编码图片",
+                description="返回格式: 'array' 返回数组形状信息，'base64' 返回 base64 编码图片，'file' 保存到本地文件",
                 required=False,
                 default="array",
-                enum=["array", "base64"]
+                enum=["array", "base64", "file"]
+            ),
+            ToolParameter(
+                name="output_path",
+                type="string",
+                description="保存路径（仅当 return_format='file' 时使用），支持相对路径和绝对路径",
+                required=False,
+                default="./imagery_output"
+            ),
+            ToolParameter(
+                name="filename",
+                type="string",
+                description="文件名（可选），不指定则自动生成。支持 .png, .jpg, .tiff 格式",
+                required=False,
+                default=None
             )
         ]
 
@@ -244,6 +258,8 @@ class ImageryTool(BaseTool):
         zoom_level = kwargs.get("zoom_level", 18)
         point_size = kwargs.get("point_size", 2000)
         return_format = kwargs.get("return_format", "array")
+        output_path = kwargs.get("output_path", "./imagery_output")
+        filename = kwargs.get("filename")
 
         img_array = self._google.get_image_data(
             location=location,
@@ -264,6 +280,16 @@ class ImageryTool(BaseTool):
 
         if return_format == "base64":
             result["image_base64"] = self._array_to_base64(img_array)
+        elif return_format == "file":
+            filepath = self._save_to_file(
+                img_array,
+                output_path=output_path,
+                filename=filename,
+                source="google",
+                location=location
+            )
+            result["saved_path"] = filepath
+            result["filename"] = os.path.basename(filepath)
         else:
             result["array_info"] = {
                 "dtype": str(img_array.dtype),
@@ -286,6 +312,8 @@ class ImageryTool(BaseTool):
         point_size = kwargs.get("point_size", 2000)
         year = kwargs.get("year", 2024)
         return_format = kwargs.get("return_format", "array")
+        output_path = kwargs.get("output_path", "./imagery_output")
+        filename = kwargs.get("filename")
 
         img_array = self._jilin.get_image_data(
             location=location,
@@ -308,6 +336,16 @@ class ImageryTool(BaseTool):
 
         if return_format == "base64":
             result["image_base64"] = self._array_to_base64(img_array)
+        elif return_format == "file":
+            filepath = self._save_to_file(
+                img_array,
+                output_path=output_path,
+                filename=filename,
+                source=f"jilin_{year}",
+                location=location
+            )
+            result["saved_path"] = filepath
+            result["filename"] = os.path.basename(filepath)
         else:
             result["array_info"] = {
                 "dtype": str(img_array.dtype),
@@ -330,6 +368,8 @@ class ImageryTool(BaseTool):
         bands = kwargs.get("bands", ["B4", "B3", "B2"])
         max_cloud_cover = kwargs.get("max_cloud_cover", 20)
         return_format = kwargs.get("return_format", "array")
+        output_path = kwargs.get("output_path", "./imagery_output")
+        filename = kwargs.get("filename")
 
         if not isinstance(date_range, (list, tuple)) or len(date_range) != 2:
             raise ValueError("date_range must be a list/tuple of 2 date strings")
@@ -358,6 +398,20 @@ class ImageryTool(BaseTool):
             # Sentinel 数据需要归一化
             normalized = np.clip(img_array.astype(float) / 3000.0, 0, 1)
             result["image_base64"] = self._array_to_base64((normalized * 255).astype(np.uint8))
+        elif return_format == "file":
+            # Sentinel 数据需要归一化后保存
+            normalized = np.clip(img_array.astype(float) / 3000.0, 0, 1)
+            normalized_uint8 = (normalized * 255).astype(np.uint8)
+
+            filepath = self._save_to_file(
+                normalized_uint8,
+                output_path=output_path,
+                filename=filename,
+                source="sentinel",
+                location=location
+            )
+            result["saved_path"] = filepath
+            result["filename"] = os.path.basename(filepath)
         else:
             result["array_info"] = {
                 "dtype": str(img_array.dtype),
@@ -385,3 +439,59 @@ class ImageryTool(BaseTool):
         img_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
 
         return img_base64
+
+    def _save_to_file(
+        self,
+        img_array: np.ndarray,
+        output_path: str,
+        filename: Optional[str] = None,
+        source: str = "imagery",
+        location: List[float] = None
+    ) -> str:
+        """
+        将 numpy 数组保存到本地文件
+
+        参数:
+            img_array: 图像数组
+            output_path: 输出目录路径
+            filename: 文件名（可选）
+            source: 数据源名称（用于自动生成文件名）
+            location: 坐标信息（用于自动生成文件名）
+
+        返回:
+            保存的文件完整路径
+        """
+        from PIL import Image
+        from datetime import datetime
+
+        # 创建输出目录
+        os.makedirs(output_path, exist_ok=True)
+
+        # 生成文件名
+        if filename is None:
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            if location and len(location) >= 2:
+                loc_str = f"{location[0]:.4f}_{location[1]:.4f}"
+                filename = f"{source}_{loc_str}_{timestamp}.png"
+            else:
+                filename = f"{source}_{timestamp}.png"
+
+        # 确保文件名有扩展名
+        if not any(filename.lower().endswith(ext) for ext in ['.png', '.jpg', '.jpeg', '.tiff', '.tif']):
+            filename += '.png'
+
+        # 完整路径
+        filepath = os.path.join(output_path, filename)
+
+        # 转换为 PIL Image 并保存
+        if len(img_array.shape) == 3 and img_array.shape[2] == 3:
+            img = Image.fromarray(img_array.astype(np.uint8), mode='RGB')
+        else:
+            img = Image.fromarray(img_array.astype(np.uint8))
+
+        # 根据文件扩展名保存
+        img.save(filepath)
+
+        logger.info(f"影像已保存到: {filepath}")
+
+        return os.path.abspath(filepath)

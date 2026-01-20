@@ -66,13 +66,16 @@ async def example_imagery_tool():
 
     imagery_tool = ImageryTool()
 
-    # 查询 Google Earth 影像（点位模式）
-    print("\n1. 查询 Google Earth 影像（点位）:")
+    # 查询 Google Earth 影像（点位模式）- 保存到文件
+    print("\n1. 查询 Google Earth 影像（点位）- 保存到文件:")
     result = await imagery_tool.safe_execute(
         location=[116.4074, 39.9042],
         source="google",
         zoom_level=18,
-        point_size=1000
+        point_size=1000,
+        return_format="file",  # 保存到文件
+        output_path="./imagery_output",  # 输出目录
+        filename="beijing_google_earth.png"  # 自定义文件名
     )
 
     if result.success:
@@ -81,18 +84,19 @@ async def example_imagery_tool():
         print(f"位置: {result.data['location']}")
         print(f"数组形状: {result.data['shape']}")
         print(f"模式: {result.data['mode']}")
-        if 'array_info' in result.data:
-            print(f"数组信息: {result.data['array_info']}")
+        print(f"已保存到: {result.data['saved_path']}")
     else:
         print(f"❌ 失败: {result.error}")
 
-    # 查询吉林一号影像（区域模式）
-    print("\n2. 查询吉林一号影像（区域）:")
+    # 查询吉林一号影像（区域模式）- 自动生成文件名
+    print("\n2. 查询吉林一号影像（区域）- 自动生成文件名:")
     result = await imagery_tool.safe_execute(
         location=[116.35, 39.85, 116.45, 39.95],
         source="jilin",
         zoom_level=17,
-        year=2024
+        year=2024,
+        return_format="file",  # 保存到文件
+        output_path="./imagery_output"  # 文件名将自动生成
     )
 
     if result.success:
@@ -101,6 +105,8 @@ async def example_imagery_tool():
         print(f"位置: {result.data['location']}")
         print(f"数组形状: {result.data['shape']}")
         print(f"年份: {result.data['year']}")
+        print(f"已保存到: {result.data['saved_path']}")
+        print(f"文件名: {result.data['filename']}")
     else:
         print(f"❌ 失败: {result.error}")
 
