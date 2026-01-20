@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# 交互式 GIS Agent 启动脚本
+# 交互式 GIS Agent 启动脚本（LLM 驱动）
 
 echo "=================================="
-echo "🌍 启动交互式 GIS Agent"
+echo "🌍 启动交互式 GIS Agent (LLM驱动)"
 echo "=================================="
 echo
 
@@ -21,17 +21,22 @@ if [ $? -ne 0 ]; then
     echo "   运行: pip install requests Pillow numpy"
 fi
 
-# 检查环境变量
+# 检查环境变量（必需）
 if [ -z "$OPENAI_API_KEY" ]; then
-    echo "⚠️  提示: 未配置 OPENAI_API_KEY"
-    echo "   将使用简化模式（关键词匹配）"
-    echo "   配置后可启用智能对话模式"
+    echo "❌ 错误: 未配置 OPENAI_API_KEY"
     echo
-    echo "   export OPENAI_API_KEY='your-api-key'"
-    echo "   export OPENAI_BASE_URL='your-base-url'  # 可选"
+    echo "本 Agent 使用 LLM Function Calling 进行智能分析"
+    echo "必须配置 OpenAI API Key 才能运行"
     echo
+    echo "配置方式:"
+    echo "  export OPENAI_API_KEY='your-api-key'"
+    echo "  export OPENAI_BASE_URL='your-base-url'  # 可选"
+    echo
+    echo "然后重新运行此脚本"
+    exit 1
 else
-    echo "✅ 检测到 OPENAI_API_KEY，将使用智能模式"
+    echo "✅ 检测到 OPENAI_API_KEY"
+    echo "✅ 将使用 LLM Function Calling 模式"
     echo
 fi
 
@@ -39,3 +44,4 @@ fi
 echo "正在启动..."
 echo
 python examples/interactive_gis_agent.py
+

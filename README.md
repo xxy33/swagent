@@ -205,6 +205,77 @@ result = await manager.execute_workflow(
 print(f"完成率: {result.completion_rate * 100}%")
 ```
 
+### 5. 交互式 GIS Agent
+
+系统提供了一个终端交互式 GIS Agent，可以查询天气和获取卫星影像。
+
+#### 快速启动
+
+```bash
+# 方式 1: 使用启动脚本
+./start_gis_agent.sh
+
+# 方式 2: 直接运行
+python examples/interactive_gis_agent.py
+```
+
+#### 功能特性
+
+- **天气查询**: 查询全球任意位置的实时天气数据
+- **卫星影像**: 获取 Google Earth、吉林一号、Sentinel-2 卫星图像
+- **双模式支持**: 智能模式（LLM）和简化模式（关键词匹配）
+- **灵活输入**: 支持城市名称和坐标格式
+
+#### 使用示例
+
+**城市查询**:
+```
+👤 您: 查询北京的天气
+
+🤖 Agent:
+📍 北京 当前天气:
+   🌡️  温度: -7.5°C
+   💧 湿度: 18%
+   🌧️  降水: 0.0 mm
+   💨 风速: 12.5 km/h
+```
+
+**坐标查询**:
+```
+👤 您: 查询(51.30, 00.07)这个位置的天气
+
+🤖 Agent:
+📍 坐标 (51.30, 0.07) 当前天气:
+   🌡️  温度: 7.9°C
+   💧 湿度: 95%
+   🌧️  降水: 0.0 mm
+   💨 风速: 18.5 km/h
+```
+
+**影像下载**:
+```
+👤 您: 下载上海的卫星影像
+
+🤖 Agent:
+📍 上海 卫星影像:
+   🗺️  数据源: google
+   📐 影像尺寸: 1000x1000 像素
+   💾 已保存到: ./satellite_images/上海_satellite.png
+```
+
+#### 支持的位置
+
+- **预定义城市**: 北京、上海、广州、深圳、成都、杭州
+- **坐标格式**: `(纬度, 经度)` 例如 `(51.30, 00.07)`
+- **全球覆盖**: 支持任意经纬度坐标
+
+#### 相关文档
+
+- [交互式 Agent 详细指南](docs/INTERACTIVE_GIS_AGENT.md)
+- [快速开始](INTERACTIVE_AGENT_QUICKSTART.md)
+- [坐标支持说明](COORDINATE_SUPPORT_UPDATE.md)
+- [GIS 工具文档](docs/GIS_TOOLS.md)
+
 ## 📖 核心功能
 
 ### Agent系统

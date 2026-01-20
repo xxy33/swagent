@@ -159,3 +159,7 @@ data/downloads/*
 *.pem
 secrets.yaml
 credentials.json
+
+tests/*
+examples/*
+数据接口/*
