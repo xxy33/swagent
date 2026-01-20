@@ -46,6 +46,14 @@
 - **流式响应**：支持流式对话
 - **Function Calling**：原生支持工具调用
 
+### 📊 StateGraph 工作流引擎
+- **状态图工作流**：类似 LangGraph 的声明式工作流定义
+- **多种节点类型**：支持同步/异步函数、装饰器模式
+- **灵活的边定义**：固定边、条件边、并行边
+- **循环支持**：支持迭代处理模式
+- **状态持久化**：检查点保存和恢复
+- **错误处理**：可配置的重试策略和退避算法
+
 ## 🏗️ 架构概览
 
 ```
@@ -80,6 +88,19 @@ swagent/
     ├── report_workflow.py      # 报告工作流
     ├── analysis_workflow.py    # 分析工作流
     └── coding_workflow.py      # 编码工作流
+
+├── stategraph/         # StateGraph 工作流引擎
+│   ├── __init__.py         # 模块导出
+│   ├── state.py            # 状态管理
+│   ├── node.py             # 节点定义
+│   ├── edge.py             # 边定义
+│   ├── graph.py            # 图核心
+│   ├── persistence.py      # 状态持久化
+│   ├── errors.py           # 错误处理
+│   └── integrations/       # 集成模块
+│       ├── llm_nodes.py        # LLM 节点
+│       ├── agent_nodes.py      # Agent 节点
+│       └── tool_nodes.py       # Tool 节点
 ```
 
 ## 📦 安装
@@ -205,7 +226,47 @@ result = await manager.execute_workflow(
 print(f"完成率: {result.completion_rate * 100}%")
 ```
 
-### 5. 交互式 GIS Agent
+### 6. StateGraph 工作流
+
+```python
+import asyncio
+from swagent.stategraph import StateGraph, START, END
+from typing import TypedDict
+
+# 定义状态类型
+class PipelineState(TypedDict):
+    input: str
+    processed: str
+    result: str
+
+# 创建图
+graph = StateGraph(PipelineState)
+
+# 定义节点
+@graph.node()
+async def preprocess(state: PipelineState) -> dict:
+    return {"processed": state["input"].strip().lower()}
+
+@graph.node()
+async def analyze(state: PipelineState) -> dict:
+    return {"result": f"分析结果: {state['processed']}"}
+
+# 设置流程
+graph.set_entry_point("preprocess")
+graph.add_edge("preprocess", "analyze")
+graph.set_exit_point("analyze")
+
+# 编译并执行
+app = graph.compile()
+
+async def main():
+    result = await app.invoke({"input": "  HELLO WORLD  "})
+    print(result.state["result"])  # "分析结果: hello world"
+
+asyncio.run(main())
+```
+
+### 7. 交互式 GIS Agent
 
 系统提供了一个终端交互式 GIS Agent，可以查询天气和获取卫星影像。
 
@@ -468,6 +529,7 @@ python tests/test_phase5_workflows.py    # 工作流模板
 - [API参考](docs/api_reference.md) - API文档
 - [架构设计](docs/architecture.md) - 系统架构说明
 - [开发指南](docs/development.md) - 开发者指南
+- [StateGraph 工作流引擎](docs/STATEGRAPH.md) - 状态图工作流引擎文档
 
 ## 🛣️ 路线图
 
@@ -478,9 +540,18 @@ python tests/test_phase5_workflows.py    # 工作流模板
 - [x] Phase 4: 工具系统
 - [x] Phase 4: 领域增强
 - [x] Phase 5: 工作流模板
+- [x] Phase 6: StateGraph 工作流引擎
+  - [x] 状态管理（TypedDict、合并策略）
+  - [x] 节点定义（装饰器、重试、超时）
+  - [x] 边定义（固定边、条件边、并行边）
+  - [x] 图执行（编译、invoke、stream）
+  - [x] 循环支持（最大迭代次数保护）
+  - [x] 状态持久化（内存、文件）
+  - [x] 错误处理（重试策略、退避算法）
+  - [x] 集成模块（LLM、Agent、Tool 节点）
 
 ### 计划中 📋
-- [ ] Phase 6: 高级功能
+- [ ] Phase 7: 高级功能
   - [ ] 多模型支持（Anthropic, Cohere等）
   - [ ] 持久化存储（对话历史、知识库更新）
   - [ ] Web UI界面
