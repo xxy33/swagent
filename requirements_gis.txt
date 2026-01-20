@@ -1,0 +1,18 @@
+# GIS 工具依赖包
+# 用于天气查询和影像切片工具
+
+# 基础依赖（天气工具必需）
+requests>=2.31.0
+
+# 影像工具依赖（Google Earth 和吉林一号）
+Pillow>=10.0.0
+numpy>=1.24.0
+mercantile>=1.2.1
+
+# Sentinel-2 依赖（可选，用于哨兵卫星数据）
+earthengine-api>=0.1.300
+geemap>=0.30.0
+pandas>=2.0.0
+
+# 数据可视化（可选）
+matplotlib>=3.7.0

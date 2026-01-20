@@ -18,8 +18,8 @@ llm:
       api_key: "${OPENAI_API_KEY}"  # 从环境变量读取
       base_url: "https://www.dmxapi.cn/v1"
       default_model: "gpt-4o-mini"
-      timeout: 300
-      max_retries: 3
+      timeout: 30
+      max_retries: 2
       
     local:
       base_url: "http://localhost:8000"
