@@ -1,10 +1,10 @@
-# SWAgent - 专业多智能体协作系统
+# Wuyu-Agent - 专业多智能体协作系统
 
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-**SWAgent** 是一个强大的多智能体协作系统，专为解决复杂的研究、企业和政府问题而设计。系统集成了先进的LLM技术、多Agent协作框架、专业工具集和领域知识库，能够高效完成复杂问题分析、长篇报告撰写等专业任务。
+**Wuyu-Agent** 是一个强大的多智能体协作系统，专为解决复杂的研究、企业和政府问题而设计。系统集成了先进的LLM技术、多Agent协作框架、专业工具集和领域知识库，能够高效完成复杂问题分析、长篇报告撰写等专业任务。
 
 ## 🎯 核心应用场景
 
@@ -584,14 +584,10 @@ python tests/test_phase5_workflows.py    # 工作流模板
 - 中国国家标准 - 固废管理标准规范
 
 ## 📞 联系方式
-
-- 项目主页: [https://github.com/yourusername/swagent](https://github.com/yourusername/swagent)
-- Issues: [https://github.com/yourusername/swagent/issues](https://github.com/yourusername/swagent/issues)
+https://github.com/xxy33/Wuyu-agent
+- 项目主页: [https://github.com/xxy33/Wuyu-agent](https://github.com/xxy33/Wuyu-agent)
+- Issues: [https://github.com/xxy33/Wuyu-agent/issues](https://github.com/xxy33/Wuyu-agent/issues)
 
 ## 🌟 Star History
 
 如果这个项目对你有帮助，请给它一个 ⭐️！
-
----
-
-**Built with ❤️ for sustainable waste management**
