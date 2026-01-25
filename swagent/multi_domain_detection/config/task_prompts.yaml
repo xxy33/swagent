@@ -1,0 +1,174 @@
+# 多领域遥感检测任务配置
+# 6大类任务的prompt模板
+
+aerial_waste:
+  name: "航拍废物检测"
+  description: "检测航拍图像中的废物堆放情况"
+  complexity: "simple"  # simple任务可以合并调用
+  prompt: |
+    你是一个专业的航拍废物检测AI。请仔细分析图像并完成以下任务：
+
+    1. 判断图像中是否存在废物（二分类）
+    2. 如果存在废物，识别废物类型（如：塑料、金属、有机物、建筑废料等）
+    3. 识别存储方式（堆放、散落、掩埋等）
+    4. 识别场地类型（工业区、居民区、空地、农田等）
+    5. 统计废物堆放点数量
+    6. 标注每个废物堆放点的位置（归一化坐标：ymin, xmin, ymax, xmax，范围0-1）
+    7. 评估非法严重程度（低/中/高）
+
+    请严格按照以下JSON格式返回结果：
+    ```json
+    {
+      "has_target": true,
+      "waste_types": ["塑料", "金属"],
+      "storage_method": "堆放",
+      "site_type": "工业区",
+      "count": 3,
+      "boundingbox": [[0.1, 0.2, 0.3, 0.4], [0.5, 0.6, 0.7, 0.8]],
+      "severity": "高",
+      "description": "检测到3处废物堆放，主要为塑料和金属混合物，位于工业区空地"
+    }
+    ```
+
+    如果未检测到废物，返回：
+    ```json
+    {
+      "has_target": false,
+      "waste_types": [],
+      "storage_method": "",
+      "site_type": "",
+      "count": 0,
+      "boundingbox": [],
+      "severity": "",
+      "description": "图像中未发现废物堆放"
+    }
+    ```
+
+cwld:
+  name: "建筑垃圾/填埋场"
+  description: "检测建筑垃圾和填埋场区域"
+  complexity: "complex"  # complex任务单独调用
+  prompt: |
+    你是一个专业的建筑垃圾/填埋场检测AI。请分析图像中的区域类型和分布：
+
+    1. 识别不同类型区域（垃圾区、建筑区、空地、植被区等）
+    2. 统计各类型目标数量
+    3. 标注目标位置（归一化坐标）
+    4. 估算各区域占图像总面积的百分比
+    5. 分析不同区域之间的空间位置关系
+
+    请严格按照以下JSON格式返回结果：
+    ```json
+    {
+      "has_target": true,
+      "regions": [
+        {"type": "垃圾区", "area_percentage": 0.3},
+        {"type": "建筑区", "area_percentage": 0.2}
+      ],
+      "count": 5,
+      "boundingbox": [[0.1, 0.2, 0.3, 0.4], [0.5, 0.6, 0.7, 0.8]],
+      "spatial_relations": "垃圾区位于建筑区东侧，空地位于北部",
+      "description": "检测到建筑垃圾堆放区域，占比约30%，周边有建筑施工区域"
+    }
+    ```
+
+landfill:
+  name: "垃圾填埋场"
+  description: "检测和分析垃圾填埋场"
+  complexity: "simple"
+  prompt: |
+    你是一个专业的垃圾填埋场检测AI。请分析：
+
+    1. 判断图像中是否为垃圾填埋场（二分类）
+    2. 统计填埋场内可见的目标数量（如垃圾堆、车辆、设施等）
+    3. 标注填埋场位置（归一化坐标）
+    4. 描述填埋场特征
+
+    请严格按照以下JSON格式返回结果：
+    ```json
+    {
+      "has_target": true,
+      "is_landfill": true,
+      "count": 2,
+      "boundingbox": [[0.1, 0.1, 0.9, 0.9]],
+      "description": "检测到大型垃圾填埋场，可见垃圾堆和作业车辆"
+    }
+    ```
+
+solar_photovoltaic_arrays:
+  name: "太阳能光伏阵列"
+  description: "检测太阳能光伏板和阵列"
+  complexity: "complex"
+  prompt: |
+    你是一个专业的太阳能光伏阵列检测AI。请分析：
+
+    1. 统计光伏板/阵列数量
+    2. 识别基础设施类型（屋顶、地面、水面等）
+    3. 标注光伏阵列位置（归一化坐标）
+    4. 估算安装倾斜角度（度数，0-90度）
+    5. 估算方位角（相对北方的角度，0-360度，南=180度）
+
+    请严格按照以下JSON格式返回结果：
+    ```json
+    {
+      "has_target": true,
+      "count": 10,
+      "infrastructure_type": "屋顶",
+      "tilt_angle": 30,
+      "azimuth": 180,
+      "boundingbox": [[0.2, 0.3, 0.4, 0.5], [0.6, 0.7, 0.8, 0.9]],
+      "description": "检测到10个光伏阵列，安装在建筑屋顶，朝南倾斜约30度"
+    }
+    ```
+
+tank:
+  name: "储罐"
+  description: "检测各类储罐"
+  complexity: "complex"
+  prompt: |
+    你是一个专业的储罐检测AI。请分析：
+
+    1. 识别储罐类型（油罐、水罐、化学品罐、气罐等）
+    2. 统计各类型储罐数量
+    3. 标注储罐位置（归一化坐标）
+
+    请严格按照以下JSON格式返回结果：
+    ```json
+    {
+      "has_target": true,
+      "tank_types": [
+        {"type": "油罐", "count": 5},
+        {"type": "水罐", "count": 2}
+      ],
+      "total_count": 7,
+      "boundingbox": [[0.1, 0.2, 0.15, 0.25], [0.3, 0.4, 0.35, 0.45]],
+      "description": "检测到7个储罐，包括5个油罐和2个水罐"
+    }
+    ```
+
+wind_turbines:
+  name: "风力涡轮机"
+  description: "检测风力涡轮机"
+  complexity: "complex"
+  prompt: |
+    你是一个专业的风力涡轮机检测AI。请分析：
+
+    1. 统计风力涡轮机数量
+    2. 标注涡轮机位置（归一化坐标）
+    3. 识别关键点（轮毂位置、底座位置，归一化坐标[y, x]）
+    4. 分析涡轮机之间的间距分布
+
+    请严格按照以下JSON格式返回结果：
+    ```json
+    {
+      "has_target": true,
+      "count": 8,
+      "boundingbox": [[0.1, 0.2, 0.3, 0.25], [0.4, 0.5, 0.6, 0.55]],
+      "keypoints": [
+        {"hub": [0.2, 0.225], "base": [0.3, 0.225]},
+        {"hub": [0.5, 0.525], "base": [0.6, 0.525]}
+      ],
+      "spacing": "平均间距约200米，呈规则排列",
+      "description": "检测到8台风力涡轮机，呈网格状分布"
+    }
+    ```

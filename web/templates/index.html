@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多领域遥感检测系统</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                <path d="M2 12h20"/>
+            </svg>
+            <h1>多领域遥感检测系统</h1>
+        </div>
+        <span class="subtitle">Multi-domain Remote Sensing Detection</span>
+    </header>
+
+    <main class="main-container">
+        <!-- Left Panel: Configuration -->
+        <aside class="config-panel">
+            <section class="panel-section">
+                <h2>1. 上传图像</h2>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" multiple accept="image/*" webkitdirectory>
+                    <div class="upload-placeholder">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                        <p>点击或拖拽文件夹到此处</p>
+                        <span class="hint">支持 JPG, PNG, TIFF, BMP 格式</span>
+                    </div>
+                </div>
+                <div class="file-list" id="fileList"></div>
+                <div class="upload-status" id="uploadStatus"></div>
+            </section>
+
+            <section class="panel-section">
+                <h2>2. 选择检测任务</h2>
+                <div class="task-list" id="taskList">
+                    <!-- Tasks will be loaded dynamically -->
+                </div>
+            </section>
+
+            <section class="panel-section">
+                <h2>3. 城市名称</h2>
+                <input type="text" id="cityName" class="input-field" placeholder="输入城市名称（用于报告）">
+            </section>
+
+            <section class="panel-section">
+                <h2>4. API 配置</h2>
+                <div class="api-config">
+                    <!-- VL 模型配置 -->
+                    <div class="config-group">
+                        <h3 class="config-group-title">VL 视觉语言模型</h3>
+                        <div class="input-group">
+                            <label for="vlBaseUrl">Base URL</label>
+                            <input type="text" id="vlBaseUrl" class="input-field" placeholder="https://api.example.com/v1">
+                        </div>
+                        <div class="input-group">
+                            <label for="vlApiKey">API Key</label>
+                            <input type="password" id="vlApiKey" class="input-field" placeholder="VL API Key">
+                        </div>
+                        <div class="input-group">
+                            <label for="vlModel">Model</label>
+                            <input type="text" id="vlModel" class="input-field" placeholder="模型名称，如 gpt-4-vision-preview">
+                        </div>
+                    </div>
+
+                    <!-- LLM 模型配置 -->
+                    <div class="config-group">
+                        <h3 class="config-group-title">LLM 文本模型</h3>
+                        <div class="input-group">
+                            <label for="llmBaseUrl">Base URL</label>
+                            <input type="text" id="llmBaseUrl" class="input-field" placeholder="https://api.example.com/v1">
+                        </div>
+                        <div class="input-group">
+                            <label for="llmApiKey">API Key</label>
+                            <input type="password" id="llmApiKey" class="input-field" placeholder="LLM API Key">
+                        </div>
+                        <div class="input-group">
+                            <label for="llmModel">Model</label>
+                            <input type="text" id="llmModel" class="input-field" placeholder="模型名称，如 gpt-4">
+                        </div>
+                    </div>
+
+                    <!-- 小模型/SAM2 配置 -->
+                    <div class="config-group">
+                        <h3 class="config-group-title">小模型 SAM2 (可选)</h3>
+                        <p class="config-hint">用于生成目标分割图像，不配置则跳过分割处理</p>
+                        <div class="input-group">
+                            <label for="sam2Url">Base URL</label>
+                            <input type="text" id="sam2Url" class="input-field" placeholder="SAM2 服务地址">
+                        </div>
+                        <div class="input-group">
+                            <label for="sam2Model">Model</label>
+                            <input type="text" id="sam2Model" class="input-field" placeholder="模型名称，如 sam2_large">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <button class="btn-primary" id="startBtn" disabled>开始检测</button>
+            <button class="btn-secondary" id="stopBtn" style="display: none;">停止检测</button>
+        </aside>
+
+        <!-- Right Panel: Progress and Results -->
+        <section class="result-panel">
+            <div class="progress-section" id="progressSection" style="display: none;">
+                <h2>检测进度</h2>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                    <span class="progress-text" id="progressText">0%</span>
+                </div>
+                <div class="current-file" id="currentFile"></div>
+                <div class="log-panel" id="logPanel"></div>
+            </div>
+
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <h2>检测结果</h2>
+                <div class="stats-cards" id="statsCards">
+                    <!-- Statistics cards will be added dynamically -->
+                </div>
+
+                <div class="report-section">
+                    <h3>检测报告</h3>
+                    <div class="report-content" id="reportContent">
+                        <!-- Report content will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="samples-section">
+                    <h3>样例图片对比</h3>
+                    <div class="samples-grid" id="samplesGrid">
+                        <!-- Sample images will be added dynamically -->
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button class="btn-primary" id="downloadReport" style="display: none;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        下载报告 (ZIP)
+                    </button>
+                    <button class="btn-secondary" id="newDetection">新建检测</button>
+                </div>
+            </div>
+
+            <div class="welcome-section" id="welcomeSection">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <h2>欢迎使用多领域遥感检测系统</h2>
+                <p>请在左侧面板上传图像、选择检测任务并配置 API 密钥后开始检测</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

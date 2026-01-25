@@ -284,3 +284,8 @@ experimental:
   
   # 协作学习
   collaborative_learning: false
+
+waste_monitoring:                                                                                                                                           
+  meta_search:                                                                                                                                              
+    api_url: "https://metaso.cn/api/search"  # 秘塔搜索API地址                                                                                              
+    api_key: "mk-86E859445B08737A325D5CB307F10EF9"              # API密钥  
